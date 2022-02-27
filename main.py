@@ -1,14 +1,17 @@
 from Data import DataHandler
-from Perceptron import Perceptron
+from Network import Network
 
 
 if __name__ == '__main__':
   data_handler = DataHandler()
-  perceptron = Perceptron(
-    training_dataframe = data_handler.generate_training_dataframe(9)
+  network = Network(
+    training_dataframe = data_handler.generate_training_dataframe(),
+    outputs = 10
   )
 
-  perceptron.train()
+  network.train()
 
-  for i in range(10):
-    print(f'Prediction for number {i} is:  ', perceptron.predict(data_handler.load_data()[str(i)]))
+  while True:
+    predict = input('Input number from 0 to 9:\n>>> ')
+    input_vector = data_handler.load_data()[predict]
+    print(f'Answer is: {network.predict(input_vector)}, input vector is: {input_vector}\n\n')
